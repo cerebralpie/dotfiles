@@ -38,6 +38,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# Sets brightness value using "brightlight"
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightlight -i 20
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightlight -d 20
+
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $up k
@@ -181,6 +185,10 @@ assign [class="Steam"] $ws9
 assign [class="minecraft-launcher"] $ws9
 assign [class="Popcorn-Time"] $ws10
 
+# specifies what apps will always float
+for_window [class="Steam"] floating enable
+
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -214,15 +222,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-	colors {
-}
-       	 position top
-	 status_command /usr/bin/bumblebee-status -m nic vpn cpu memory pasink pasource layout-xkb time date battery system -p date.left-click="gsimplecal"   engine.workspacewrap=false memory.format="{percent:05.02f}%" traffic.states="^down" traffic.exclude="tun0,tun1,tun2,lo,vpn0,vpn1,vpn2" datetime.format="%H:%M - %d/%m/%y" spacer.theme.bg=$barColor -t iceberg
-}
 
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
@@ -280,10 +279,11 @@ exec thunderbird
 exec optimus-manager-qt
 exec redshift-gtk
 exec blueman-applet
-exec "/opt/thefanclub/overgrive/venv/bin/python3 /opt/thefanclub/overgrive/overgrive"
+exec_always "python3 /opt/thefanclub/overgrive/overgrive"
 
 # auto-start personnal scripts
-exec "~/Documents/Scripts/touchpad-conf.sh"
+exec_always "~/.config/i3/scripts/touchpad-conf.sh"
+exec_always "~/.config/i3/scripts/polybar.sh"
 
 # i3-gaps
 for_window [class="^.*"] border pixel 0 #troque o 5 por 0 se quiser excluir as bordas.
