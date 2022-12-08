@@ -1,3 +1,11 @@
+/* Installed Plugins
+ * https://github.com/jiangmiao/auto-pairs
+ * https://github.com/preservim/nerdtree
+ * https://github.com/sheerun/vim-polyglot
+ * https://github.com/maxboisvert/vim-simple-complete
+ *
+ */
+
 set number
 set tabstop=4
 set shiftwidth=4
