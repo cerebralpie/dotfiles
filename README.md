@@ -1,2 +1,2 @@
 # dotfiles
-My personal i3wm configuration files.
+My personal Linux configuration files.
